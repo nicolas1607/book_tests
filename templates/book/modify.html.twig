@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier un livre{% endblock %}
+
+{% block body %}
+
+<style>
+    h1 {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    #book_form {
+        padding-left: 32rem;
+        padding-right: 32rem;
+    }
+
+    #book_form div {
+        display: grid;
+        grid-template-columns: 20% 80%;
+    }
+</style>
+
+<h1>Modifier le livre</h1>
+
+{{ form(modify_book_form) }}
+
+{% endblock %}

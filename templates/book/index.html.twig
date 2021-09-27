@@ -1,20 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello BookController!{% endblock %}
+{% block title %}Ajout d'un livre{% endblock %}
 
 {% block body %}
+
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    h1 {
+        padding: 2rem;
+        text-align: center;
+    }
+
+    .table {
+        padding-left: 16rem;
+        padding-right: 16rem;
+    }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<h1 class="container">Les livres ajoutés</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/Users/nicolasmormiche/Desktop/04_book/src/Controller/BookController.php'|file_link(0) }}">src/Controller/BookController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/nicolasmormiche/Desktop/04_book/templates/book/index.html.twig'|file_link(0) }}">templates/book/index.html.twig</a></code></li>
-    </ul>
-</div>
+<table class="table table-hover container">
+    <thead>
+        <tr>
+            <th scope="col">Nom</th>
+            <th scope="col">Auteur</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for book in books %}
+        <tr class="table-active">
+            <th scope="row">{{ book.name }}</th>
+            <th scope="row">{{ book.author }}</th>
+            <th scope="row">{{ book.releaseAt|date("m/d/Y") }}</th>
+            <td class="table-action">
+                <a href="{{ path('modify_book', {'id': book.id}) }}">Modifier</a>
+                <a href="{{ path('delete_book', {'id': book.id}) }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+        <tr class="table-active">
+            <th></th>
+            <th></th>
+            <th></th>
+            <th scope="row add-book">
+                <a href="{{ path('add_book') }}">Ajouter un nouveau livre</a>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
 {% endblock %}
