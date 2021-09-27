@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouter un livre{% endblock %}
+{% block title %}Ajouter un auteur{% endblock %}
 
 {% block body %}
 
@@ -10,19 +10,19 @@
         text-align: center;
     }
 
-    #book_form {
+    #author_form {
         padding-left: 32rem;
         padding-right: 32rem;
     }
 
-    #book_form div {
+    #author_form div {
         display: grid;
         grid-template-columns: 20% 80%;
     }
 </style>
 
-<h1>Ajouter un livre</h1>
+<h1>Ajouter un auteur</h1>
 
-{{ form(add_book_form) }}
+{{ form(add_author_form) }}
 
 {% endblock %}
