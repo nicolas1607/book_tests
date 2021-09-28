@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+<style>
+    h1 {
+        padding: 2rem;
+        text-align: center;
+    }
+    .info {
+        width: 50%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        padding: 2rem;
+    }
+    .info-content {
+        min-height: 1rem;
+        position: relative;
+    }
+    .content {
+        margin-bottom: 2rem;
+    }
+    .buttons {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+    .buttons a {
+        margin-right: 1rem;
+    }
+</style>
+
+<h1>Mon profil</h1>
+
+<div class="profile container">
+    <h2>Bienvenue {{ user.firstname }} !</h2>
+    {% if user.address %}
+    <p>Vous êtes ici sur votre profil perso. Vous pouvez ajouter de nouveaux <a href="{{ url('add_book') }}">livres</a> ainsi que de nouveaux <a href="{{ url('add_author') }}">auteurs.</a></p>
+    {% else %}
+    <p>Vous êtes ici sur votre profil perso. Avant de pouvoir ajouter de nouveaux livres ou auteurs, il vous faudra renseigner votre adresse.</p>
+    {% endif %}
+    <div class="info">
+        <div class="email info-content">
+            <h3>Vos informations</h3>
+            <p class="content">{{ user.firstname }} {{ user.lastname }} </br> {{ user.email }}</p>
+            <div class="buttons">
+                <a href="{{ path('modify_info') }}">Modifier</a>
+            </div>
+        </div>
+        <div class="address info-content">
+            <h3>Votre adresse</h3>
+            {% if user.address %}
+            <p class="content">{{ user.address.address }}, {{ user.address.postalCode }} {{ user.address.city }} </br> {{ user.address.country }}</p>
+            <div class="buttons">
+                <a href="{{ path('modify_address', {'id': user.address.id}) }}">Modifier</a>
+                <a href="{{ path('delete_address', {'id': user.address.id}) }}">Supprimer</a>
+            </div>
+            {% else %}
+            <a href="{{ url('add_address') }}">Renseignez vos informations.</a>
+            {% endif %}
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

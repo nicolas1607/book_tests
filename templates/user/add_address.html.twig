@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier un auteur{% endblock %}
+{% block title %}Ajouter mon adresse{% endblock %}
 
 {% block body %}
 
@@ -10,19 +10,23 @@
         text-align: center;
     }
 
-    #author_form {
+    #user_address_form {
         padding-left: 32rem;
         padding-right: 32rem;
     }
 
-    #author_form div {
+    #user_address_form div {
         display: grid;
         grid-template-columns: 30% 70%;
     }
+
+    .submit_form {
+        margin: auto;
+    }
 </style>
 
-<h1>Modifier l'auteur</h1>
+<h1>Ajouter mon adresse</h1>
 
-{{ form(modify_author_form) }}
+{{ form(add_address_form) }}
 
 {% endblock %}

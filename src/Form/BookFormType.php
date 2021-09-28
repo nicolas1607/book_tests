@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Book;
+use App\Entity\Author;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,12 +17,17 @@ class BookFormType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('author')
+            ->add('author', EntityType::class, [
+                'class' => Author::class,
+                'choice_label' => 'name',
+                'expanded' => false, // radio buttons, checkboxes, ...
+                'multiple' => false // radio buttons, checkboxes, ...
+            ])
             ->add('releaseAt', DateType::class, [
                 'widget' => 'single_text',
                 'input'  => 'datetime_immutable'
             ])
-            ->add('submit', SubmitType::class);
+            ->add('Ajouter', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

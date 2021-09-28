@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\BookRepository;
+use App\Entity\Author;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookRepository;
 
 /**
  * @ORM\Entity(repositoryClass=BookRepository::class)
@@ -23,7 +24,7 @@ class Book
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\ManyToOne(targetEntity=Author::class, inversedBy="books")
      */
     private $author;
 
@@ -49,12 +50,12 @@ class Book
         return $this;
     }
 
-    public function getAuthor(): ?string
+    public function getAuthor(): ?Author
     {
         return $this->author;
     }
 
-    public function setAuthor(string $author): self
+    public function setAuthor(?Author $author): self
     {
         $this->author = $author;
 

@@ -24,25 +24,31 @@
             <th scope="col">Nom</th>
             <th scope="col">Auteur</th>
             <th scope="col">Date</th>
+            {% if is_granted('ROLE_ADMIN') %}
             <th scope="col">Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
         {% for book in books %}
         <tr class="table-active">
             <th scope="row">{{ book.name }}</th>
-            <th scope="row">{{ book.author }}</th>
+            <th scope="row">{{ book.author.name }}</th>
             <th scope="row">{{ book.releaseAt|date("m/d/Y") }}</th>
+            {% if is_granted('ROLE_ADMIN') %}
             <td class="table-action">
                 <a href="{{ path('modify_book', {'id': book.id}) }}">Modifier</a>
                 <a href="{{ path('delete_book', {'id': book.id}) }}">Supprimer</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
         <tr class="table-active">
             <th></th>
             <th></th>
+            {% if is_granted('ROLE_ADMIN') %}
             <th></th>
+            {% endif %}
             <th scope="row add-book">
                 <a href="{{ path('add_book') }}">Ajouter un nouveau livre</a>
             </th>

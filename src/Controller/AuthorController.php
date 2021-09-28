@@ -35,12 +35,12 @@ class AuthorController extends AbstractController
     public function add(Request $request): Response
     {
         $cat = new Author();
-        $addCatForm = $this->createForm(AuthorFormType::class, $cat);
+        $addAuthorForm = $this->createForm(AuthorFormType::class, $cat);
 
-        $addCatForm->handleRequest($request);
+        $addAuthorForm->handleRequest($request);
 
-        if ($addCatForm->isSubmitted() && $addCatForm->isValid()) {
-            $author = $addCatForm->getData();
+        if ($addAuthorForm->isSubmitted() && $addAuthorForm->isValid()) {
+            $author = $addAuthorForm->getData();
 
             $this->em->persist($author);
             $this->em->flush(); // faire l'action en BD
@@ -49,7 +49,7 @@ class AuthorController extends AbstractController
         }
 
         return $this->render('author/add.html.twig', [
-            'add_author_form' => $addCatForm->createView()
+            'add_author_form' => $addAuthorForm->createView()
         ]);
     }
 
@@ -69,17 +69,17 @@ class AuthorController extends AbstractController
      */
     public function modify(Request $request, Author $id): Response
     {
-        $updateCatForm = $this->createForm(AuthorFormType::class, $id);
+        $updateAuthorForm = $this->createForm(AuthorFormType::class, $id);
 
-        $updateCatForm->handleRequest($request);
+        $updateAuthorForm->handleRequest($request);
 
-        if ($updateCatForm->isSubmitted() && $updateCatForm->isValid()) {
+        if ($updateAuthorForm->isSubmitted() && $updateAuthorForm->isValid()) {
             $this->em->flush();
             return $this->redirectToRoute('author');
         }
 
         return $this->render('author/modify.html.twig', [
-            'modify_author_form' => $updateCatForm->createView()
+            'modify_author_form' => $updateAuthorForm->createView()
         ]);
     }
 }

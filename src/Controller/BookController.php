@@ -35,12 +35,12 @@ class BookController extends AbstractController
     public function add(Request $request): Response
     {
         $cat = new Book();
-        $addCatForm = $this->createForm(BookFormType::class, $cat);
+        $addBookForm = $this->createForm(BookFormType::class, $cat);
 
-        $addCatForm->handleRequest($request);
+        $addBookForm->handleRequest($request);
 
-        if ($addCatForm->isSubmitted() && $addCatForm->isValid()) {
-            $book = $addCatForm->getData();
+        if ($addBookForm->isSubmitted() && $addBookForm->isValid()) {
+            $book = $addBookForm->getData();
 
             $this->em->persist($book);
             $this->em->flush(); // faire l'action en BD
@@ -49,7 +49,7 @@ class BookController extends AbstractController
         }
 
         return $this->render('book/add.html.twig', [
-            'add_book_form' => $addCatForm->createView()
+            'add_book_form' => $addBookForm->createView()
         ]);
     }
 
@@ -69,17 +69,17 @@ class BookController extends AbstractController
      */
     public function modify(Request $request, Book $id): Response
     {
-        $updateCatForm = $this->createForm(BookFormType::class, $id);
+        $updateBookForm = $this->createForm(BookFormType::class, $id);
 
-        $updateCatForm->handleRequest($request);
+        $updateBookForm->handleRequest($request);
 
-        if ($updateCatForm->isSubmitted() && $updateCatForm->isValid()) {
+        if ($updateBookForm->isSubmitted() && $updateBookForm->isValid()) {
             $this->em->flush();
             return $this->redirectToRoute('book');
         }
 
         return $this->render('book/modify.html.twig', [
-            'modify_book_form' => $updateCatForm->createView()
+            'modify_book_form' => $updateBookForm->createView()
         ]);
     }
 }
