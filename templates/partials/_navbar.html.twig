@@ -1,8 +1,10 @@
 <style>
-    .logout {
-        width: 10%;
+    .logout, .login {
         display: flex;
-        justify-content: space-between;
+    }
+    .logout a, .login a {
+        margin-left: .5rem;
+        margin-right: .5rem;
     }
 </style>
 
@@ -29,12 +31,16 @@
             </form> #}
             {% if (app.user) %}
             <div class="logout">
-                <a href="{{ url('profile') }}">{{ app.user.firstname }}</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ url('admin') }}">Admin</a>
+                {% endif %}
+                <a href="{{ url('profile') }}">Mon profil</a>
                 <a href="{{ url('app_logout') }}">Logout</a>
             </div>
             {% else %}
             <div class="login">
                 <a href="{{ url('app_login') }}">Login</a>
+                <a href="{{ url('app_register') }}">Register</a>
             </div>
             {% endif %}
         </div>

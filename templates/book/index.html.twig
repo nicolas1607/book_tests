@@ -11,8 +11,12 @@
     }
 
     .table {
-        padding-left: 16rem;
-        padding-right: 16rem;
+        text-align: center;
+        width: 70%;
+    }
+    .form-add {
+        display: flex;
+        justify-content: center;
     }
 </style>
 
@@ -43,17 +47,11 @@
             {% endif %}
         </tr>
         {% endfor %}
-        <tr class="table-active">
-            <th></th>
-            <th></th>
-            {% if is_granted('ROLE_ADMIN') %}
-            <th></th>
-            {% endif %}
-            <th scope="row add-book">
-                <a href="{{ path('add_book') }}">Ajouter un nouveau livre</a>
-            </th>
-        </tr>
     </tbody>
 </table>
+
+{% if is_granted('ROLE_ADMIN') %}
+<a class="form-add" href="{{ path('add_author') }}">Ajouter un nouvel auteur</a>
+{% endif %}
 
 {% endblock %}

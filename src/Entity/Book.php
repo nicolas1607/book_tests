@@ -5,8 +5,10 @@ namespace App\Entity;
 use App\Entity\Author;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 /**
+ * @ApiResource()
  * @ORM\Entity(repositoryClass=BookRepository::class)
  */
 class Book

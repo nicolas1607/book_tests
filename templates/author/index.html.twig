@@ -11,8 +11,12 @@
     }
 
     .table {
-        padding-left: 16rem;
-        padding-right: 16rem;
+        text-align: center;
+        width: 50%;
+    }
+    .form-add {
+        display: flex;
+        justify-content: center;
     }
 </style>
 
@@ -23,7 +27,9 @@
         <tr>
             <th scope="col">Nom</th>
             <th scope="col">Âge</th>
+            {% if is_granted('ROLE_ADMIN') %}
             <th scope="col">Action</th>
+            {% endif %}
         </tr>
     </thead>
     <tbody>
@@ -31,20 +37,19 @@
         <tr class="table-active">
             <th scope="row">{{ author.name }}</th>
             <th scope="row">{{ author.age }}</th>
+            {% if is_granted('ROLE_ADMIN') %}
             <td class="table-action">
                 <a href="{{ path('modify_author', {'id': author.id}) }}">Modifier</a>
                 <a href="{{ path('delete_author', {'id': author.id}) }}">Supprimer</a>
             </td>
+            {% endif %}
         </tr>
         {% endfor %}
-        <tr class="table-active">
-            <th></th>
-            <th></th>
-            <th scope="row add-author">
-                <a href="{{ path('add_author') }}">Ajouter un nouvel auteur</a>
-            </th>
-        </tr>
     </tbody>
 </table>
+
+{% if is_granted('ROLE_ADMIN') %}
+<a class="form-add" href="{{ path('add_author') }}">Ajouter un nouvel auteur</a>
+{% endif %}
 
 {% endblock %}

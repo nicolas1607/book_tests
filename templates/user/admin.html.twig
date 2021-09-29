@@ -1,0 +1,96 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma gestion{% endblock %}
+
+{% block body %}
+<style>
+    h1 {
+        padding: 2rem;
+        text-align: center;
+    }
+    .profile {
+        margin-top: 2rem;
+        margin-bottom: 4rem;
+    }
+    .user-roles {
+        display: flex;
+    }
+    .user-roles p {
+        margin-right: 1rem;
+    }
+    .table {
+        text-align: center;
+    }
+</style>
+
+<h1>Gestion administateur</h1>
+
+<div class="profile container">
+    <h2>Bienvenue {{ admin.firstname }} dans l'onglet Administrateur!</h2>
+    <p>Ici il vous est possible de gérer la liste des utilisateurs et bien d'autres choses.</p>
+</div>
+
+<div class="table container">
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="tab" href="">Les utilisateurs</a>
+        </li>
+        {# <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Dropdown</a>
+            <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+        </li> #}
+    </ul>
+
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade show active" id="home">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Prénom</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Rôles</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <th scope="row">{{user.id}}</th>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.email}}</td>
+                        {% if user.address %}
+                        <td>{{user.address.address}}, 
+                            {{user.address.postalCode}} 
+                            {{user.address.city}}</td>
+                        {% else %}
+                        <td>Non renseignée</td>
+                        {% endif %}
+                        <td class="user-roles">
+                            {% for role in user.roles %}
+                            <p>{{role}}</p>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a href="{{ path('delete_user', {'id': user.id}) }}">Supprimer</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

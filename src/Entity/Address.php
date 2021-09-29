@@ -38,7 +38,7 @@ class Address
     private $country;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, mappedBy="address", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="address", cascade={"persist"})
      */
     private $user;
 

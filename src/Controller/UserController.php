@@ -22,16 +22,29 @@ class UserController extends AbstractController
         $this->em = $em;
     }
 
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin(User $user): Response
-    {
-        // $user = $this->em->getRepository(User::class)->findOneBy($user);
-        return $this->render('home/admin.html.twig', [
-            'admin' => $user
-        ]);
-    }
+    // /**
+    //  * @Route("/admin", name="admin")
+    //  */
+    // public function admin(): Response
+    // {
+    //     $admin = $this->getUser();
+    //     $users = $this->em->getRepository(User::class)->findAll();
+    //     return $this->render('user/admin.html.twig', [
+    //         'admin' => $admin,
+    //         'users' => $users
+    //     ]);
+    // }
+
+    // /**
+    //  * @Route("/admin/user/delete/{id}", name="delete_user")
+    //  */
+    // public function deleteUser(User $id): Response
+    // {
+    //     $this->em->remove($id);
+    //     $this->em->flush(); // faire l'action en BD
+
+    //     return $this->redirectToRoute('admin');
+    // }
 
     /**
      * @Route("/profile", name="profile")
@@ -39,7 +52,6 @@ class UserController extends AbstractController
     public function profile(): Response
     {
         $user = $this->getUser();
-        // $user = $this->em->getRepository(User::class)->findOneBy($user);
         return $this->render('user/profile.html.twig', [
             'user' => $user
         ]);
